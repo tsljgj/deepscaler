@@ -117,7 +117,7 @@ We report Pass@1 accuracy averaged over 16 samples for each problem. Notably, ou
 
 | Model | AIME 2024 | MATH 500 | AMC 2023 | Minerva Math | OlympiadBench | Avg. |
 |-------|-----------|-----------|-----------|--------------|---------------|------|
-| 2.5-7B-Instruct | 13.3 | 79.8 | 50.6 | 34.6 | 40.7 | 43.8 |
+| Qwen2.5-Math-7B-Instruct | 13.3 | 79.8 | 50.6 | 34.6 | 40.7 | 43.8 |
 | rStar-Math-7B | 26.7 | 78.4 | 47.5 | - | 47.1 | - |
 | Eurus-2-7B-PRIME | 26.7 | 79.2 | 57.8 | 38.6 | 42.1 | 48.9 |
 | Qwen2.5-7B-SimpleRL | 26.7 | 82.4 | 62.5 | <strong>39.7</strong> | 43.3 | 50.9 |
@@ -134,7 +134,7 @@ To replicate our reported numbers for `DeepScaleR-1.5B-Preview`, run:
 
 ## Acknowledgements
 
-- Our training experiments are powered by our heavily modified fork of [Verl](https://github.com/agentica-project/verl), an open-source RLHF library.
+- Our training experiments are powered by our heavily modified fork of [verl](https://github.com/volcengine/verl), an open-source RLHF library.
 - Our model is trained on top of [`DeepSeek-R1-Distill-Qwen-1.5B`](https://huggingface.co/deepseek-ai/DeepSeek-R1-Distill-Qwen-1.5B).
 - Our work is done as part of  [Berkeley Sky Computing Lab](https://skycomputing.berkeley.edu/) and [Berkeley AI Research](https://bair.berkeley.edu/).
 
@@ -144,7 +144,7 @@ To replicate our reported numbers for `DeepScaleR-1.5B-Preview`, run:
 ```bibtex
 @misc{deepscaler2025,
   title={DeepScaleR: Surpassing O1-Preview with a 1.5B Model by Scaling RL},
-  author={Michael Luo and Sijun Tan and Justin Wong and Xiaoxiang Shi and William Tang and Manan Roongta and Colin Cai and Jeffrey Luo and Tianjun Zhang and Erran Li and Raluca Ada Popa and Ion Stoica},
+  author={Michael Luo and Sijun Tan and Justin Wong and Xiaoxiang Shi and William Y. Tang and Manan Roongta and Colin Cai and Jeffrey Luo and Tianjun Zhang and Li Erran Li and Raluca Ada Popa and Ion Stoica},
   year={2025},
   howpublished={\url{https://pretty-radio-b75.notion.site/DeepScaleR-Surpassing-O1-Preview-with-a-1-5B-Model-by-Scaling-RL-19681902c1468005bed8ca303013a4e2}},
   note={Notion Blog}
