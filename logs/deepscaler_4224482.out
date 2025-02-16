@@ -1,0 +1,20 @@
+++ /usr/bin/tclsh /usr/share/Modules/libexec/modulecmd.tcl bash load cuda-12.1
++ eval 'LD_LIBRARY_PATH=/usr/local/cuda-12.1/lib64:/home/mingkaid/miniforge3/envs/deepscaler/lib/python3.10/site-packages/nvidia/cusparse/lib:/data/user_data/mingkaid/open-r1/openr1/lib/python3.11/site-packages/nvidia/nvjitlink/lib; export LD_LIBRARY_PATH;
+PATH=/usr/local/cuda-12.1/bin:/home/mingkaid/.local/bin:/home/mingkaid/miniforge3/envs/deepscaler/bin:/home/mingkaid/.local/bin:/home/mingkaid/miniforge3/condabin:/home/mingkaid/.local/bin:/home/mingkaid/bin:/usr/share/Modules/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin; export PATH;
+CUDA_PATH=/usr/local/cuda-12.1; export CUDA_PATH;
+_LMFILES_=/usr/share/Modules/modulefiles/cuda-12.1; export _LMFILES_;
+LOADEDMODULES=cuda-12.1; export LOADEDMODULES;
+test 0;'
+++ LD_LIBRARY_PATH=/usr/local/cuda-12.1/lib64:/home/mingkaid/miniforge3/envs/deepscaler/lib/python3.10/site-packages/nvidia/cusparse/lib:/data/user_data/mingkaid/open-r1/openr1/lib/python3.11/site-packages/nvidia/nvjitlink/lib
+++ export LD_LIBRARY_PATH
+++ PATH=/usr/local/cuda-12.1/bin:/home/mingkaid/.local/bin:/home/mingkaid/miniforge3/envs/deepscaler/bin:/home/mingkaid/.local/bin:/home/mingkaid/miniforge3/condabin:/home/mingkaid/.local/bin:/home/mingkaid/bin:/usr/share/Modules/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+++ export PATH
+++ CUDA_PATH=/usr/local/cuda-12.1
+++ export CUDA_PATH
+++ _LMFILES_=/usr/share/Modules/modulefiles/cuda-12.1
+++ export _LMFILES_
+++ LOADEDMODULES=cuda-12.1
+++ export LOADEDMODULES
+++ test 0
++ _mlstatus=0
++ return 0

@@ -1,0 +1,47 @@
++ export VLLM_ATTENTION_BACKEND=XFORMERS
++ VLLM_ATTENTION_BACKEND=XFORMERS
++ MODEL_PATH=/data/user_data/mingkaid/models/Qwen2.5-3B
++ python3 -m verl.trainer.main_ppo algorithm.adv_estimator=grpo data.train_files=/home/mingkaid/deepscaler/data/train.parquet data.val_files=/home/mingkaid/deepscaler/data/aime.parquet data.train_batch_size=128 data.val_batch_size=512 data.max_prompt_length=1024 data.max_response_length=8192 actor_rollout_ref.model.path=/data/user_data/mingkaid/models/Qwen2.5-3B actor_rollout_ref.actor.optim.lr=1e-6 actor_rollout_ref.model.use_remove_padding=True actor_rollout_ref.actor.ppo_mini_batch_size=64 actor_rollout_ref.actor.use_dynamic_bsz=True actor_rollout_ref.actor.ppo_max_token_len_per_gpu=32768 actor_rollout_ref.actor.use_kl_loss=True actor_rollout_ref.actor.kl_loss_coef=0.001 actor_rollout_ref.actor.kl_loss_type=low_var_kl actor_rollout_ref.actor.ulysses_sequence_parallel_size=1 actor_rollout_ref.model.enable_gradient_checkpointing=True actor_rollout_ref.actor.fsdp_config.param_offload=False actor_rollout_ref.actor.fsdp_config.grad_offload=False actor_rollout_ref.actor.fsdp_config.optimizer_offload=False actor_rollout_ref.rollout.tensor_model_parallel_size=1 actor_rollout_ref.rollout.name=vllm actor_rollout_ref.rollout.temperature=0.6 actor_rollout_ref.rollout.val_temperature=0.6 actor_rollout_ref.rollout.gpu_memory_utilization=0.85 actor_rollout_ref.rollout.n=8 actor_rollout_ref.rollout.n_val=8 actor_rollout_ref.ref.fsdp_config.param_offload=True algorithm.kl_ctrl.kl_coef=0.001 trainer.critic_warmup=0 'trainer.logger=[console,wandb]' trainer.project_name=deepscaler trainer.experiment_name=deepscaler-1.5b-8k +trainer.val_before_train=True trainer.n_gpus_per_node=4 ' '
+Traceback (most recent call last):
+  File "/home/mingkaid/miniforge3/envs/deepscaler/lib/python3.10/site-packages/transformers/utils/import_utils.py", line 1817, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+  File "/home/mingkaid/miniforge3/envs/deepscaler/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/mingkaid/miniforge3/envs/deepscaler/lib/python3.10/site-packages/transformers/tokenization_utils.py", line 27, in <module>
+    from .tokenization_utils_base import (
+  File "/home/mingkaid/miniforge3/envs/deepscaler/lib/python3.10/site-packages/transformers/tokenization_utils_base.py", line 91, in <module>
+    from tokenizers import AddedToken
+  File "/home/mingkaid/miniforge3/envs/deepscaler/lib/python3.10/site-packages/tokenizers/__init__.py", line 78, in <module>
+    from .tokenizers import (
+ModuleNotFoundError: No module named 'tokenizers.tokenizers'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/mingkaid/miniforge3/envs/deepscaler/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/home/mingkaid/miniforge3/envs/deepscaler/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/data/user_data/mingkaid/deepscaler/verl/verl/trainer/main_ppo.py", line 21, in <module>
+    from verl.trainer.ppo.ray_trainer import RayPPOTrainer
+  File "/data/user_data/mingkaid/deepscaler/verl/verl/trainer/ppo/ray_trainer.py", line 35, in <module>
+    from verl.trainer.ppo import core_algos
+  File "/data/user_data/mingkaid/deepscaler/verl/verl/trainer/ppo/core_algos.py", line 25, in <module>
+    import verl.utils.torch_functional as verl_F
+  File "/data/user_data/mingkaid/deepscaler/verl/verl/utils/torch_functional.py", line 222, in <module>
+    from transformers import PreTrainedTokenizer
+  File "<frozen importlib._bootstrap>", line 1075, in _handle_fromlist
+  File "/home/mingkaid/miniforge3/envs/deepscaler/lib/python3.10/site-packages/transformers/utils/import_utils.py", line 1805, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+  File "/home/mingkaid/miniforge3/envs/deepscaler/lib/python3.10/site-packages/transformers/utils/import_utils.py", line 1819, in _get_module
+    raise RuntimeError(
+RuntimeError: Failed to import transformers.tokenization_utils because of the following error (look up to see its traceback):
+No module named 'tokenizers.tokenizers'
++ trainer.nnodes=1 trainer.save_freq=20 trainer.test_freq=20 trainer.default_hdfs_dir=null trainer.total_epochs=30
+/var/spool/slurmd/job4195171/slurm_script: line 59: trainer.nnodes=1: command not found

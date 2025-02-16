@@ -1,0 +1,25 @@
+++ /usr/bin/tclsh /usr/share/Modules/libexec/modulecmd.tcl bash load cuda-12.1
++ eval 'LD_LIBRARY_PATH=/usr/local/cuda-12.1/lib64:/data/user_data/mingkaid/open-r1/openr1/lib/python3.11/site-packages/nvidia/nvjitlink/lib; export LD_LIBRARY_PATH;
+PATH=/usr/local/cuda-12.1/bin:/home/mingkaid/.local/bin:/home/mingkaid/.local/bin:/home/mingkaid/miniforge3/envs/deepscaler/bin:/home/mingkaid/.local/bin:/home/mingkaid/miniforge3/condabin:/home/mingkaid/.local/bin:/home/mingkaid/bin:/usr/share/Modules/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin; export PATH;
+CUDA_PATH=/usr/local/cuda-12.1; export CUDA_PATH;
+_LMFILES_=/usr/share/Modules/modulefiles/cuda-12.1; export _LMFILES_;
+LOADEDMODULES=cuda-12.1; export LOADEDMODULES;
+test 0;'
+++ LD_LIBRARY_PATH=/usr/local/cuda-12.1/lib64:/data/user_data/mingkaid/open-r1/openr1/lib/python3.11/site-packages/nvidia/nvjitlink/lib
+++ export LD_LIBRARY_PATH
+++ PATH=/usr/local/cuda-12.1/bin:/home/mingkaid/.local/bin:/home/mingkaid/.local/bin:/home/mingkaid/miniforge3/envs/deepscaler/bin:/home/mingkaid/.local/bin:/home/mingkaid/miniforge3/condabin:/home/mingkaid/.local/bin:/home/mingkaid/bin:/usr/share/Modules/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
+++ export PATH
+++ CUDA_PATH=/usr/local/cuda-12.1
+++ export CUDA_PATH
+++ _LMFILES_=/usr/share/Modules/modulefiles/cuda-12.1
+++ export _LMFILES_
+++ LOADEDMODULES=cuda-12.1
+++ export LOADEDMODULES
+++ test 0
++ _mlstatus=0
++ return 0
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2023 NVIDIA Corporation
+Built on Mon_Apr__3_17:16:06_PDT_2023
+Cuda compilation tools, release 12.1, V12.1.105
+Build cuda_12.1.r12.1/compiler.32688072_0

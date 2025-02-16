@@ -1,0 +1,64 @@
++ export VLLM_ATTENTION_BACKEND=XFORMERS
++ VLLM_ATTENTION_BACKEND=XFORMERS
++ module load cuda-12.2
++ local _mlredir=1
++ '[' -n '' ']'
++ case " $@ " in
++ '[' 1 -eq 0 ']'
++ _module_raw load cuda-12.2
++ MODEL_PATH=/data/user_data/mingkaid/models/Qwen2.5-3B
++ python3 -m verl.trainer.main_ppo algorithm.adv_estimator=grpo data.train_files=/home/mingkaid/deepscaler/data/train.parquet data.val_files=/home/mingkaid/deepscaler/data/aime.parquet data.train_batch_size=128 data.val_batch_size=512 data.max_prompt_length=1024 data.max_response_length=8192 actor_rollout_ref.model.path=/data/user_data/mingkaid/models/Qwen2.5-3B actor_rollout_ref.actor.optim.lr=1e-6 actor_rollout_ref.model.use_remove_padding=True actor_rollout_ref.actor.ppo_mini_batch_size=64 actor_rollout_ref.actor.use_dynamic_bsz=True actor_rollout_ref.actor.ppo_max_token_len_per_gpu=32768 actor_rollout_ref.actor.use_kl_loss=True actor_rollout_ref.actor.kl_loss_coef=0.001 actor_rollout_ref.actor.kl_loss_type=low_var_kl actor_rollout_ref.actor.ulysses_sequence_parallel_size=1 actor_rollout_ref.model.enable_gradient_checkpointing=True actor_rollout_ref.actor.fsdp_config.param_offload=False actor_rollout_ref.actor.fsdp_config.grad_offload=False actor_rollout_ref.actor.fsdp_config.optimizer_offload=False actor_rollout_ref.rollout.tensor_model_parallel_size=1 actor_rollout_ref.rollout.name=vllm actor_rollout_ref.rollout.temperature=0.6 actor_rollout_ref.rollout.val_temperature=0.6 actor_rollout_ref.rollout.gpu_memory_utilization=0.85 actor_rollout_ref.rollout.n=8 actor_rollout_ref.rollout.n_val=8 actor_rollout_ref.ref.fsdp_config.param_offload=True algorithm.kl_ctrl.kl_coef=0.001 trainer.critic_warmup=0 'trainer.logger=[console,wandb]' trainer.project_name=deepscaler trainer.experiment_name=deepscaler-1.5b-8k +trainer.val_before_train=True trainer.n_gpus_per_node=4 trainer.nnodes=1 trainer.save_freq=20 trainer.test_freq=20 trainer.default_hdfs_dir=null trainer.total_epochs=30
+2025-02-13 13:42:07,502	INFO worker.py:1841 -- Started a local Ray instance.
+[36m(main_task pid=817984)[0m /home/mingkaid/miniforge3/envs/deepscaler/lib/python3.10/site-packages/vllm/connections.py:8: RuntimeWarning: Failed to read commit hash:
+[36m(main_task pid=817984)[0m No module named 'vllm._version'
+[36m(main_task pid=817984)[0m   from vllm.version import __version__ as VLLM_VERSION
+[36m(pid=818427)[0m /home/mingkaid/miniforge3/envs/deepscaler/lib/python3.10/site-packages/vllm/connections.py:8: RuntimeWarning: Failed to read commit hash:
+[36m(pid=818427)[0m No module named 'vllm._version'
+[36m(pid=818427)[0m   from vllm.version import __version__ as VLLM_VERSION
+[36m(pid=818651)[0m /home/mingkaid/miniforge3/envs/deepscaler/lib/python3.10/site-packages/vllm/connections.py:8: RuntimeWarning: Failed to read commit hash:
+[36m(pid=818651)[0m No module named 'vllm._version'
+[36m(pid=818651)[0m   from vllm.version import __version__ as VLLM_VERSION
+[36m(WorkerDict pid=818427)[0m You are attempting to use Flash Attention 2.0 with a model not initialized on GPU. Make sure to move the model to GPU after initializing it on CPU with `model.to('cuda')`.
+[36m(WorkerDict pid=818653)[0m Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+[36m(WorkerDict pid=818651)[0m Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.06s/it]
+[36m(WorkerDict pid=818427)[0m Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.02it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:01<00:00,  1.01it/s]
+[36m(WorkerDict pid=818427)[0m Flash Attention 2.0 only supports torch.float16 and torch.bfloat16 dtypes, but the current dype in Qwen2ForCausalLM is torch.float32. You should run training or inference using Automatic Mixed-Precision via the `with torch.autocast(device_type='torch_device'):` decorator, or load the model with the `torch_dtype` argument. Example: `model = AutoModel.from_pretrained("openai/whisper-tiny", attn_implementation="flash_attention_2", torch_dtype=torch.float16)`
+[36m(pid=818652)[0m /home/mingkaid/miniforge3/envs/deepscaler/lib/python3.10/site-packages/vllm/connections.py:8: RuntimeWarning: Failed to read commit hash:[32m [repeated 2x across cluster][0m
+[36m(pid=818652)[0m No module named 'vllm._version'[32m [repeated 2x across cluster][0m
+[36m(pid=818652)[0m   from vllm.version import __version__ as VLLM_VERSION[32m [repeated 2x across cluster][0m
+[36m(WorkerDict pid=818652)[0m You are attempting to use Flash Attention 2.0 with a model not initialized on GPU. Make sure to move the model to GPU after initializing it on CPU with `model.to('cuda')`.[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=818427)[0m Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=818652)[0m Loading checkpoint shards:  50%|█████     | 1/2 [00:01<00:01,  1.06s/it][32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=818652)[0m Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.00it/s]Loading checkpoint shards: 100%|██████████| 2/2 [00:02<00:00,  1.01s/it][32m [repeated 3x across cluster][0m
+Error executing job with overrides: ['algorithm.adv_estimator=grpo', 'data.train_files=/home/mingkaid/deepscaler/data/train.parquet', 'data.val_files=/home/mingkaid/deepscaler/data/aime.parquet', 'data.train_batch_size=128', 'data.val_batch_size=512', 'data.max_prompt_length=1024', 'data.max_response_length=8192', 'actor_rollout_ref.model.path=/data/user_data/mingkaid/models/Qwen2.5-3B', 'actor_rollout_ref.actor.optim.lr=1e-6', 'actor_rollout_ref.model.use_remove_padding=True', 'actor_rollout_ref.actor.ppo_mini_batch_size=64', 'actor_rollout_ref.actor.use_dynamic_bsz=True', 'actor_rollout_ref.actor.ppo_max_token_len_per_gpu=32768', 'actor_rollout_ref.actor.use_kl_loss=True', 'actor_rollout_ref.actor.kl_loss_coef=0.001', 'actor_rollout_ref.actor.kl_loss_type=low_var_kl', 'actor_rollout_ref.actor.ulysses_sequence_parallel_size=1', 'actor_rollout_ref.model.enable_gradient_checkpointing=True', 'actor_rollout_ref.actor.fsdp_config.param_offload=False', 'actor_rollout_ref.actor.fsdp_config.grad_offload=False', 'actor_rollout_ref.actor.fsdp_config.optimizer_offload=False', 'actor_rollout_ref.rollout.tensor_model_parallel_size=1', 'actor_rollout_ref.rollout.name=vllm', 'actor_rollout_ref.rollout.temperature=0.6', 'actor_rollout_ref.rollout.val_temperature=0.6', 'actor_rollout_ref.rollout.gpu_memory_utilization=0.85', 'actor_rollout_ref.rollout.n=8', 'actor_rollout_ref.rollout.n_val=8', 'actor_rollout_ref.ref.fsdp_config.param_offload=True', 'algorithm.kl_ctrl.kl_coef=0.001', 'trainer.critic_warmup=0', 'trainer.logger=[console,wandb]', 'trainer.project_name=deepscaler', 'trainer.experiment_name=deepscaler-1.5b-8k', '+trainer.val_before_train=True', 'trainer.n_gpus_per_node=4', 'trainer.nnodes=1', 'trainer.save_freq=20', 'trainer.test_freq=20', 'trainer.default_hdfs_dir=null', 'trainer.total_epochs=30']
+Traceback (most recent call last):
+  File "/data/user_data/mingkaid/deepscaler/verl/verl/trainer/main_ppo.py", line 114, in main
+    ray.get(main_task.remote(config))
+  File "/home/mingkaid/miniforge3/envs/deepscaler/lib/python3.10/site-packages/ray/_private/auto_init_hook.py", line 21, in auto_init_wrapper
+    return fn(*args, **kwargs)
+  File "/home/mingkaid/miniforge3/envs/deepscaler/lib/python3.10/site-packages/ray/_private/client_mode_hook.py", line 103, in wrapper
+    return func(*args, **kwargs)
+  File "/home/mingkaid/miniforge3/envs/deepscaler/lib/python3.10/site-packages/ray/_private/worker.py", line 2772, in get
+    values, debugger_breakpoint = worker.get_objects(object_refs, timeout=timeout)
+  File "/home/mingkaid/miniforge3/envs/deepscaler/lib/python3.10/site-packages/ray/_private/worker.py", line 919, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(ActorDiedError): [36mray::main_task()[39m (pid=817984, ip=10.1.1.24)
+  File "/data/user_data/mingkaid/deepscaler/verl/verl/trainer/main_ppo.py", line 199, in main_task
+    trainer.init_workers()
+  File "/data/user_data/mingkaid/deepscaler/verl/verl/trainer/ppo/ray_trainer.py", line 530, in init_workers
+    self.actor_rollout_wg.init_model()
+  File "/data/user_data/mingkaid/deepscaler/verl/verl/single_controller/ray/base.py", line 42, in func
+    output = ray.get(output)
+ray.exceptions.ActorDiedError: The actor died unexpectedly before finishing this task.
+	class_name: create_colocated_worker_cls.<locals>.WorkerDict
+	actor_id: a35acf8aace9ef4940fa04f501000000
+	pid: 818653
+	name: 65NyeCWorkerDict_0:3
+	namespace: e997da34-9360-4f40-b0d8-d6657d6f9851
+	ip: 10.1.1.24
+The actor is dead because its worker process has died. Worker exit type: SYSTEM_ERROR Worker exit detail: Worker unexpectedly exits with a connection error code 2. End of file. There are some potential root causes. (1) The process is killed by SIGKILL by OOM killer due to high memory usage. (2) ray stop --force is called. (3) The worker is crashed unexpectedly due to SIGSEGV or other unexpected errors.
+
+Set the environment variable HYDRA_FULL_ERROR=1 for a complete stack trace.
+[36m(WorkerDict pid=818652)[0m Flash Attention 2.0 only supports torch.float16 and torch.bfloat16 dtypes, but the current dype in Qwen2ForCausalLM is torch.float32. You should run training or inference using Automatic Mixed-Precision via the `with torch.autocast(device_type='torch_device'):` decorator, or load the model with the `torch_dtype` argument. Example: `model = AutoModel.from_pretrained("openai/whisper-tiny", attn_implementation="flash_attention_2", torch_dtype=torch.float16)`[32m [repeated 3x across cluster][0m
+[36m(WorkerDict pid=818652)[0m Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s][32m [repeated 4x across cluster][0m
+slurmstepd: error: Detected 2 oom_kill events in StepId=4195617.batch. Some of the step tasks have been OOM Killed.

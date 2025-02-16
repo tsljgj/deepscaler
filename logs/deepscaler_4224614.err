@@ -1,0 +1,37 @@
++ module load cuda-12.1
++ local _mlredir=1
++ '[' -n '' ']'
++ case " $@ " in
++ '[' 1 -eq 0 ']'
++ _module_raw load cuda-12.1
++ source activate deepscaler
+/var/spool/slurmd/job4224614/slurm_script: line 17: activate: No such file or directory
++ export LD_LIBRARY_PATH=/lib64:/usr/local/cuda-12.1/lib64:/data/user_data/mingkaid/open-r1/openr1/lib/python3.11/site-packages/nvidia/nvjitlink/lib
++ LD_LIBRARY_PATH=/lib64:/usr/local/cuda-12.1/lib64:/data/user_data/mingkaid/open-r1/openr1/lib/python3.11/site-packages/nvidia/nvjitlink/lib
++ export LD_LIBRARY_PATH=/extras/CUPTI/lib64:/lib64:/usr/local/cuda-12.1/lib64:/data/user_data/mingkaid/open-r1/openr1/lib/python3.11/site-packages/nvidia/nvjitlink/lib
++ LD_LIBRARY_PATH=/extras/CUPTI/lib64:/lib64:/usr/local/cuda-12.1/lib64:/data/user_data/mingkaid/open-r1/openr1/lib/python3.11/site-packages/nvidia/nvjitlink/lib
++ export LD_LIBRARY_PATH=/home/mingkaid/miniforge3/envs/deepscaler/lib:/extras/CUPTI/lib64:/lib64:/usr/local/cuda-12.1/lib64:/data/user_data/mingkaid/open-r1/openr1/lib/python3.11/site-packages/nvidia/nvjitlink/lib
++ LD_LIBRARY_PATH=/home/mingkaid/miniforge3/envs/deepscaler/lib:/extras/CUPTI/lib64:/lib64:/usr/local/cuda-12.1/lib64:/data/user_data/mingkaid/open-r1/openr1/lib/python3.11/site-packages/nvidia/nvjitlink/lib
++ export VLLM_ATTENTION_BACKEND=XFORMERS
++ VLLM_ATTENTION_BACKEND=XFORMERS
++ nvcc --version
++ python3 -c 'import torch; print(torch.cuda.is_available(), torch.version.cuda)'
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/home/mingkaid/miniforge3/envs/deepscaler/lib/python3.10/site-packages/torch/__init__.py", line 367, in <module>
+    from torch._C import *  # noqa: F403
+ImportError: /home/mingkaid/miniforge3/envs/deepscaler/lib/python3.10/site-packages/torch/lib/../../nvidia/cusparse/lib/libcusparse.so.12: undefined symbol: __nvJitLinkComplete_12_4, version libnvJitLink.so.12
++ MODEL_PATH=/data/user_data/mingkaid/models/Qwen2.5-3B
++ python3 -m verl.trainer.main_ppo algorithm.adv_estimator=grpo data.train_files=/home/mingkaid/deepscaler/data/train.parquet data.val_files=/home/mingkaid/deepscaler/data/aime.parquet data.train_batch_size=128 data.val_batch_size=512 data.max_prompt_length=1024 data.max_response_length=8192 actor_rollout_ref.model.path=/data/user_data/mingkaid/models/Qwen2.5-3B actor_rollout_ref.actor.optim.lr=1e-6 actor_rollout_ref.model.use_remove_padding=True actor_rollout_ref.actor.ppo_mini_batch_size=64 actor_rollout_ref.actor.use_dynamic_bsz=True actor_rollout_ref.actor.ppo_max_token_len_per_gpu=32768 actor_rollout_ref.actor.use_kl_loss=True actor_rollout_ref.actor.kl_loss_coef=0.001 actor_rollout_ref.actor.kl_loss_type=low_var_kl actor_rollout_ref.actor.ulysses_sequence_parallel_size=1 actor_rollout_ref.model.enable_gradient_checkpointing=True actor_rollout_ref.actor.fsdp_config.param_offload=False actor_rollout_ref.actor.fsdp_config.grad_offload=False actor_rollout_ref.actor.fsdp_config.optimizer_offload=False actor_rollout_ref.rollout.tensor_model_parallel_size=1 actor_rollout_ref.rollout.name=vllm actor_rollout_ref.rollout.temperature=0.6 actor_rollout_ref.rollout.val_temperature=0.6 actor_rollout_ref.rollout.gpu_memory_utilization=0.85 actor_rollout_ref.rollout.n=8 actor_rollout_ref.rollout.n_val=8 actor_rollout_ref.ref.fsdp_config.param_offload=True algorithm.kl_ctrl.kl_coef=0.001 trainer.critic_warmup=0 'trainer.logger=[console,wandb]' trainer.project_name=deepscaler trainer.experiment_name=deepscaler-1.5b-8k +trainer.val_before_train=True trainer.n_gpus_per_node=8 trainer.nnodes=1 trainer.save_freq=20 trainer.test_freq=20 trainer.default_hdfs_dir=null trainer.total_epochs=30
+Traceback (most recent call last):
+  File "/home/mingkaid/miniforge3/envs/deepscaler/lib/python3.10/runpy.py", line 187, in _run_module_as_main
+    mod_name, mod_spec, code = _get_module_details(mod_name, _Error)
+  File "/home/mingkaid/miniforge3/envs/deepscaler/lib/python3.10/runpy.py", line 110, in _get_module_details
+    __import__(pkg_name)
+  File "/data/user_data/mingkaid/deepscaler/verl/verl/__init__.py", line 22, in <module>
+    from .protocol import DataProto
+  File "/data/user_data/mingkaid/deepscaler/verl/verl/protocol.py", line 25, in <module>
+    import torch
+  File "/home/mingkaid/miniforge3/envs/deepscaler/lib/python3.10/site-packages/torch/__init__.py", line 367, in <module>
+    from torch._C import *  # noqa: F403
+ImportError: /home/mingkaid/miniforge3/envs/deepscaler/lib/python3.10/site-packages/torch/lib/../../nvidia/cusparse/lib/libcusparse.so.12: undefined symbol: __nvJitLinkComplete_12_4, version libnvJitLink.so.12
